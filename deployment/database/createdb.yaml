@@ -18,25 +18,25 @@
     - rds_subnet_group:
         state: present
         region: us-east-1
-        name: dbsubnet
+        name: dbsubnet_pk
         description: My Fancy Ex Parrot Subnet Group
         subnets:
           - subnet-0355d46b1fdb1e454
           - subnet-076e27a5d4cd44d53
-      register: dbsubnet
+      register: dbsubnet_pk
     - debug:
-        var: dbsubnet
+        var: dbsubnet_pk
     - rds:
         command: create
         region: us-east-1
-        instance_name: myapp-database
+        instance_name: myapp-database_pk
         db_name: userdb
         db_engine: MySQL
         size: 10
         instance_type: db.t2.micro
         username: mysql_admin
         password: 1nsecure
-        subnet: dbsubnet
+        subnet: dbsubnet_pk
         license_model: "general-public-license"
         vpc_security_groups: "{{ dbsg.group_id }}"
         multi_zone: no
